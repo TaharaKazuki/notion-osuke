@@ -4,8 +4,8 @@ import React from 'react';
 import { subscriptions } from '../../../migrations/schema';
 
 type DashboardSetupProps = {
-  user: AuthUser;
-  subscriptions: {} | null;
+  user?: AuthUser;
+  subscriptions?: {} | null;
 };
 
 const DashboardSetup = ({ user, subscriptions }: DashboardSetupProps) => {
