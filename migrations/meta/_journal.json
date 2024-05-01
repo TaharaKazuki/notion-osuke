@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1713340632484,
+      "tag": "0000_great_redwing",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1713343263574,
+      "tag": "0001_volatile_deathbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1713356222058,
+      "tag": "0002_marvelous_hellcat",
+      "breakpoints": true
+    }
+  ]
+}
