@@ -45,6 +45,15 @@ const DashboardSetup = ({ user, subscriptions }: DashboardSetupProps) => {
     value
   ) => {
     const file = value.logo?.[0];
+    let filePath = null;
+    const workspaceUUID = v4();
+    console.info(file);
+
+    if (file) {
+      try {
+        const { data, error } = await supabase.storage.from('work-space-logos');
+      } catch (error) {}
+    }
   };
 
   return <div>DashboardSetup</div>;
