@@ -36,6 +36,10 @@ export const CreateWorkspaceFormSchema = z.object({
   logo: z.any(),
 });
 
+export type CreateWorkspaceFormSchemaType = z.infer<
+  typeof CreateWorkspaceFormSchema
+>;
+
 export const UploadBannerFormSchema = z.object({
   banner: z.string().describe('Banner Image'),
 });
