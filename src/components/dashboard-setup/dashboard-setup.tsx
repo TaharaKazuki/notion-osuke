@@ -51,8 +51,20 @@ const DashboardSetup = ({ user, subscriptions }: DashboardSetupProps) => {
 
     if (file) {
       try {
-        const { data, error } = await supabase.storage.from('work-space-logos');
-      } catch (error) {}
+        const { data, error } = await supabase.storage
+          .from('work-space-logos')
+          .upload(`workspaceLogo.${workspaceUUID}`, file, {
+            cacheControl: '3600',
+            upsert: true,
+          });
+        if (error) throw new Error('');
+      } catch (error) {
+        console.info('Error', error);
+        toast({
+          variant: 'destructive',
+          title: '',
+        });
+      }
     }
   };
 

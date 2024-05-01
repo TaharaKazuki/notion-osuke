@@ -18,7 +18,8 @@
     "proplan",
     "signup",
     "supabase",
-    "tailwindcss"
+    "tailwindcss",
+    "upsert"
   ],
   "tailwindCSS.experimental.classRegex": [
     ["ctl\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
