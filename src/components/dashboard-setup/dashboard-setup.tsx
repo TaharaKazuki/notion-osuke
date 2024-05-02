@@ -17,6 +17,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/router';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { type CreateWorkspaceFormSchemaType } from '@/lib/types';
+import { workspaces } from '../../lib/supabase/schema';
 
 type DashboardSetupProps = {
   user?: AuthUser;
@@ -62,10 +63,13 @@ const DashboardSetup = ({ user, subscriptions }: DashboardSetupProps) => {
         console.info('Error', error);
         toast({
           variant: 'destructive',
-          title: '',
+          title: 'Error! Could not upload your workspace logo',
         });
       }
     }
+    try {
+      const newWorkspace;
+    } catch (error) {}
   };
 
   return <div>DashboardSetup</div>;
