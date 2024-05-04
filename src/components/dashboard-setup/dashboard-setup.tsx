@@ -68,6 +68,7 @@ const DashboardSetup = ({ user, subscriptions }: DashboardSetupProps) => {
       }
     }
     try {
+      const newWorkspace;
     } catch (error) {}
   };
 
