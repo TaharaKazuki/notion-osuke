@@ -6,7 +6,7 @@ import { workspaces, subscriptions } from '../../../../migrations/schema';
 import DashboardSetup from '@/components/dashboard-setup/dashboard-setup';
 import { getUserSubscriptionStatus } from '@/lib/supabase/queries';
 
-const DashboardPag = async () => {
+const DashboardPage = async () => {
   const supabase = createServerComponentClient({ cookies });
   const {
     data: { user },
@@ -34,11 +34,11 @@ const DashboardPag = async () => {
           bg-background
           "
       >
-        <DashboardSetup user={user} subscriptions={subscription} />
+        <DashboardSetup user={user} subscription={subscription} />
       </div>
     );
 
   return <div>DashboardPage</div>;
 };
 
-export default DashboardPag;
+export default DashboardPage;

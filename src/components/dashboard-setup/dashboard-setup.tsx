@@ -2,7 +2,6 @@
 import { AuthUser } from '@supabase/supabase-js';
 import React, { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { subscriptions } from '../../../migrations/schema';
 import { v4 } from 'uuid';
 import {
   Card,
@@ -14,18 +13,23 @@ import {
 
 import * as z from 'zod';
 import { useToast } from '@/components/ui/use-toast';
+import { Label } from '@/components/ui/label';
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { type CreateWorkspaceFormSchemaType } from '@/lib/types';
 import { workspaces } from '../../lib/supabase/schema';
-import EmojiPicker from '../global/emoji-picker';
+import EmojiPicker from '@/components/global/emoji-picker';
+import { Input } from '@/components/ui/input';
+import { Subscription } from '@/lib/supabase/supabase.types';
+import { Button } from '@/components/ui/button';
+import Loader from '../global/Loader';
 
 type DashboardSetupProps = {
   user: AuthUser;
-  subscriptions: {} | null;
+  subscription: Subscription | null;
 };
 
-const DashboardSetup = ({ user, subscriptions }: DashboardSetupProps) => {
+const DashboardSetup = ({ user, subscription }: DashboardSetupProps) => {
   const { toast } = useToast();
   const router = useRouter();
   const [selectedEmoji, setSelectedEmoji] = useState('💼');
@@ -87,8 +91,59 @@ const DashboardSetup = ({ user, subscriptions }: DashboardSetupProps) => {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-4">
               <div className="text-5xl">
-                {/* <EmojiPicker></EmojiPicker> */}
+                <EmojiPicker getValue={(emoji) => setSelectedEmoji(emoji)}>
+                  {selectedEmoji}
+                </EmojiPicker>
               </div>
+              <div className="w-full">
+                <Label
+                  htmlFor="workspaceName"
+                  className="text-sm text-muted-foreground"
+                >
+                  Name
+                </Label>
+                <Input
+                  id="workspace"
+                  type="text"
+                  placeholder="Workspace Name"
+                  disabled={isLoading}
+                  {...register('workspaceName', {
+                    required: 'Workspace name is required',
+                  })}
+                />
+                <small className="text-red-600">
+                  {errors?.workspaceName?.message?.toString()}
+                </small>
+              </div>
+            </div>
+
+            <div>
+              <Label htmlFor="logo" className="text-sm text-muted-foreground">
+                Workspace Logo
+              </Label>
+              <Input
+                id="logo"
+                type="file"
+                accept="image/*"
+                placeholder="Workspace Name"
+                {...(register('logo'),
+                {
+                  required: false,
+                })}
+              />
+              <small className="text-red-600">
+                {errors.logo?.message?.toString()}
+              </small>
+              {subscription?.status !== 'active' && (
+                <small className="block text-muted-foreground">
+                  To customize your workspace, you need to be on a Pro Plan
+                </small>
+              )}
+            </div>
+            <div className="self-end">
+              <Button disabled={isLoading} type="submit">
+                {!isLoading ? 'Create Workspace' : <Loader />}
+              </Button>
             </div>
           </div>
         </form>
