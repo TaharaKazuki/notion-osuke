@@ -14,10 +14,11 @@ import {
 
 import * as z from 'zod';
 import { useToast } from '@/components/ui/use-toast';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { type CreateWorkspaceFormSchemaType } from '@/lib/types';
 import { workspaces } from '../../lib/supabase/schema';
+import EmojiPicker from '../global/emoji-picker';
 
 type DashboardSetupProps = {
   user?: AuthUser;
@@ -68,11 +69,32 @@ const DashboardSetup = ({ user, subscriptions }: DashboardSetupProps) => {
       }
     }
     try {
-      const newWorkspace;
+      // const newWorkspace;
     } catch (error) {}
   };
 
-  return <div>DashboardSetup</div>;
+  return (
+    <Card className="h-screen w-[800px] sm:h-auto">
+      <CardHeader>
+        <CardTitle>Create A Workspace</CardTitle>
+        <CardDescription>
+          Lets create a private workspace to get you started.You can add
+          collaborators later from the workspace settings tab.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-4">
+              <div className="text-5xl">
+                {/* <EmojiPicker></EmojiPicker> */}
+              </div>
+            </div>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
+  );
 };
 
 export default DashboardSetup;
