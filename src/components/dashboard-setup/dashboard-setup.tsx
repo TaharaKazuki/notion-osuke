@@ -20,7 +20,7 @@ import { type CreateWorkspaceFormSchemaType } from '@/lib/types';
 import { workspaces } from '../../lib/supabase/schema';
 import EmojiPicker from '@/components/global/emoji-picker';
 import { Input } from '@/components/ui/input';
-import { Subscription } from '@/lib/supabase/supabase.types';
+import { Subscription, workspace } from '@/lib/supabase/supabase.types';
 import { Button } from '@/components/ui/button';
 import Loader from '../global/Loader';
 
@@ -64,6 +64,7 @@ const DashboardSetup = ({ user, subscription }: DashboardSetupProps) => {
             upsert: true,
           });
         if (error) throw new Error('');
+        filePath = data.path;
       } catch (error) {
         console.info('Error', error);
         toast({
@@ -72,8 +73,19 @@ const DashboardSetup = ({ user, subscription }: DashboardSetupProps) => {
         });
       }
     }
+
     try {
-      // const newWorkspace;
+      const newWorkspace: workspace = {
+        data: null,
+        createdAt: new Date().toISOString(),
+        iconId: selectedEmoji,
+        id: workspaceUUID,
+        inTrash: '',
+        title: value.workspaceName,
+        workspaceOwner: user.id,
+        logo: filePath || null,
+        bannerUrl: '',
+      };
     } catch (error) {}
   };
 
