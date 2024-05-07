@@ -21,8 +21,8 @@ import { workspaces } from '../../lib/supabase/schema';
 import EmojiPicker from '../global/emoji-picker';
 
 type DashboardSetupProps = {
-  user?: AuthUser;
-  subscriptions?: {} | null;
+  user: AuthUser;
+  subscriptions: {} | null;
 };
 
 const DashboardSetup = ({ user, subscriptions }: DashboardSetupProps) => {
